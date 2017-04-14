@@ -1,0 +1,11 @@
+name 'cm'
+maintainer 'Kirk Larsen'
+maintainer_email 'kirkl@slalom.com'
+description 'Installs/Configures a basic application'
+version '0.0.1'
+source_url ''
+issues_url ''
+
+depends 'mysql', '~> 8.0'
+depends 'mariadb', '~> 1.3.0'
+depends 'yum', '~> 5.0.1'
