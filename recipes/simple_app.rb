@@ -1,12 +1,3 @@
-platform = node['platform']
-version = node['platform_version']
-
-# Ubuntu 14 needs apt-get update
-execute 'update_apt' do
-  command 'apt-get update -y'
-  only_if { platform == 'ubuntu' }
-end
-
 # install packages
 %w(git python).each do |pkg|
   package pkg do
@@ -32,11 +23,6 @@ end
 # populate db
 execute 'populate_db' do
   command 'mysql --password=change_me --socket=/var/run/mysql-simple/mysqld.sock < /usr/src/simple-app/db/setup_db.sql'
-  only_if { not (version =~ /^7/ and platform == 'centos') }
-end
-execute 'populate_db' do
-  command '/usr/bin/mysqladmin password change_me; mysql --password=change_me < /usr/src/simple-app/db/setup_db.sql'
-  only_if { version =~ /^7/ and platform == 'centos' }
 end
 
 # Get node
